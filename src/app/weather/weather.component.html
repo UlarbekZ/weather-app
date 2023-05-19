@@ -1,0 +1,66 @@
+<div class="name" *ngIf="data">{{ data.city.name }}</div>
+<div class="container-table">
+  <table
+    class="table table-bordered caption-top border-success"
+    *ngIf="weatherData"
+  >
+    <caption>
+      Weather
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Main</th>
+        <th scope="col">Description</th>
+        <th scope="col">Icon</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let weather of weatherData">
+        <th scope="row">{{ weather.id }}</th>
+        <td>{{ weather.main }}</td>
+        <td>{{ weather.description }}</td>
+        <td>
+          <img [src]="getUrl(weather.icon)" width="20" height="20" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    class="table table-bordered caption-top border-success"
+    *ngIf="weatherDetails"
+  >
+    <caption>
+      Weather Details
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">All</th>
+        <th scope="col">Speed</th>
+        <th scope="col">Degree</th>
+        <th scope="col">Gust</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let weather of weatherDetails">
+        <td scope="row">{{ weather.all }}</td>
+        <td scope="row">{{ weather.speed }}</td>
+        <td scope="row">{{ weather.deg }}</td>
+        <td scope="row">{{ weather.gust }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container-chart" *ngIf="data">
+  <div class="chart" *ngFor="let chart of listOfCharts">
+    <canvas
+      baseChart
+      width="130"
+      height="100"
+      [type]="'line'"
+      [data]="getData(chart)"
+      [options]="lineChartOptions"
+    >
+    </canvas>
+  </div>
+</div>
